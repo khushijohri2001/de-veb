@@ -12,7 +12,3 @@ html, body {
 	height: 100vh;
 }
 
-/* Optional: make body background match scene fallback */
-body {
-	background: #0b1220;
-}

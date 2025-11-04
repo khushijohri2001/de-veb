@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./src/style.css"/>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
 
-<body>
-  <canvas id="canvas"></canvas>
-   <script type="module" src="./src/main.js"></script>
-</body>
+  <body>
+    <div class="w-full">
+      <div class="landing w-full h-[200vh]">
+        <div class="fixed top-0 flex justify-between items-center px-8 py-6 font-semibold w-full">
+          <h4>deveb.co</h4>
+          <nav class="flex items-center gap-4">
+            <a href="">Services</a>
+            <a href="">Projects</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+          </nav>
+        </div>
+
+        <div class="sticky top-1/2 left-1/2 text-center pointer-events-none">
+        <h1 class="text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-4/5 text-6xl whitespace-nowrap tracking-tighter"> Design . Development . Deploy </h1>
+        <p class="w-[560px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis rerum tempora perferendis? Illo iure sed iste quidem earum quam nemo, dolor ipsa sint commodi animi nostrum debitis omnis maiores.</p>
+        </div>
+
+        <canvas id="canvas" class="sticky top-0 left-0 z-[-1]"></canvas>
+      </div>
+
+      <div class="h-screen w-full"></div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>

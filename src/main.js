@@ -2,18 +2,22 @@
 import * as THREE from "three";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const canvas = document.getElementById("canvas");
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
+  alpha: true,
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0b1220);
 
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -44,6 +48,9 @@ const material = new THREE.ShaderMaterial({
     uTime: {
       value: 0,
     },
+    uColorChange: {
+      value: 0,
+    },
   },
 });
 
@@ -51,6 +58,42 @@ const icosa = new THREE.Mesh(geometry, material);
 scene.add(icosa);
 
 icosa.position.y = -2.5;
+
+// Animations GSAP
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".landing",
+    start: "top top",
+    end: "bottom center",
+    scrub: 2,
+  },
+});
+
+tl.to(
+  icosa.position,
+  {
+    y: 0,
+    z: -2,
+    ease: "power2.inOut",
+  },
+  "a"
+).to(
+  material.uniforms.uColorChange,
+  {
+    value: 1,
+    ease: "linear",
+  },
+  "a"
+).to(
+  ".landing h1", {
+    opacity: 0
+  },
+  "a"
+).to(
+  ".landing p", {
+    opacity: 1
+  }
+)
 
 // Resize handling
 function onWindowResize() {
@@ -60,7 +103,6 @@ function onWindowResize() {
 }
 window.addEventListener("resize", onWindowResize);
 
-
 // Animation loop
 const clock = new THREE.Clock();
 
@@ -68,7 +110,6 @@ function animate() {
   requestAnimationFrame(animate);
   const t = clock.getElapsedTime();
   material.uniforms.uTime.value = clock.getElapsedTime();
-  controls.update();
   renderer.render(scene, camera);
 }
 
